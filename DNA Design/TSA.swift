@@ -12,16 +12,25 @@ class TSA: BaseHA{
     }
     
     override func boot() {
-        <#code#>
+        for s in 0..<10{
+            print("############# STRAND \(s) start ##############")
+            initPop()
+            strand()
+            DNAs.append(bestIndividual.sequence)
+            print("############# STRAND \(s) end ##############")
+            print(bestIndividual.toString())
+        }
     }
     
     let x_min:Double = 1
     let x_max:Double = 4
     override func strand() {
         for t in 0..<maxIteration{
+            let start = Date.now
+            fixGC()
             fit()
             nsga2(individuals: &self.pops)
-            if pops[0].costs.isDominate(bestIndividual.costs) || t==0{
+            if t==0 || pops[0].costs.isDominate(bestIndividual.costs){
                 bestIndividual = pops[0]
             }
             let xr: Double = x_min+Double.random(in: 0..<1)*(x_max-x_min)
@@ -61,22 +70,28 @@ class TSA: BaseHA{
                     }
                 }
             }
-            fixGC()
+            let interval = Date.timeIntervalSince(start)
+            print("iteration: \(t),  best: \(bestIndividual.toString()), \(bestIndividual.costs), time interval: \(String(describing: interval))")
         }
     }
     
     override func fit() {
+//        let group = DispatchGroup()
+//        let q = DispatchQueue(label: "SafeArrayQueue", attributes: .concurrent)
         for i in 0..<popSize{
-            let c = continuity(sequence: pops[i].sequence, CT: 2)
-            let h = hairpin(sequence: pops[i].sequence, pMin: 6, rMin: 6)
-            pops[i].costs.append(c)
-            pops[i].costs.append(h)
-        }
+//            q.async(group: group) {
+                self.pops[i].costs.removeAll()
+                let c = continuity(sequence: self.pops[i].sequence, CT: 2)
+                let h = hairpin(sequence: self.pops[i].sequence, pMin: 6, rMin: 6)
+                self.pops[i].costs.append(c)
+                self.pops[i].costs.append(h)
+            }
+//        }
+//        group.wait()
     }
     
     override func fitOfAllDNAs() {
         
     }
-    
     
 }

@@ -17,6 +17,14 @@ struct Individual{
     mutating func minusDominitedCount(){
         self.dominitedCount -= 1
     }
+    
+    func toString() -> String{
+        var s = ""
+        for b in sequence{
+            s.append(b.code())
+        }
+        return s
+    }
 }
 
 enum DNABase:Int{

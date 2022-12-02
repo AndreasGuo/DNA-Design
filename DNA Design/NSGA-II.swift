@@ -103,7 +103,7 @@ extension Array where Element == Int{
     func isDominate(_ y:Array<Int>)->Bool{
         var all_leq = true
         var one_le = false
-        for i in 0..<self.count{
+        for i in 0..<Swift.min(y.count, self.count){
             if self[i] > y[i] {all_leq=false}
             if self[i] < y[i] {one_le=true}
         }
