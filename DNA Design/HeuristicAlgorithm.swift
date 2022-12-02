@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol HeuristicAlgorithm{
+fileprivate protocol HeuristicAlgorithm{
     var maxIteration: Int {set get}
     var popSize: Int{set get}
     var dimension: Int{set get}
-    var bestIndividual: Individual {get set}
+    var bestIndividual: Individual! {get set}
     var pops: [Individual]{get set}
     var DNAs: [[DNABase]]{get set}
     
@@ -21,8 +21,44 @@ protocol HeuristicAlgorithm{
     func fitOfAllDNAs()
 }
 
+class BaseHA: HeuristicAlgorithm{
+    var maxIteration: Int
+    
+    var popSize: Int
+    
+    var dimension: Int
+    
+    var bestIndividual: Individual!
+    
+    var pops: [Individual] = []
+    
+    var DNAs: [[DNABase]] = []
+    
+    init(maxIteration: Int, popSize: Int, dimension: Int) {
+        self.maxIteration = maxIteration
+        self.popSize = popSize
+        self.dimension = dimension
+    }
+    
+    func boot() {
+        
+    }
+    
+    func strand() {
+        
+    }
+    
+    func fit() {
+        
+    }
+    
+    func fitOfAllDNAs() {
+        
+    }
+}
+
 // properties
-extension HeuristicAlgorithm{
+extension BaseHA{
     var lower: Int{
         get{0}
     }
@@ -32,8 +68,8 @@ extension HeuristicAlgorithm{
 }
 
 // functions
-extension HeuristicAlgorithm{
-    mutating func initPop(){
+extension BaseHA{
+    func initPop(){
         pops.removeAll(keepingCapacity: true)
         for _ in 0..<popSize{
             let sequence = (0..<dimension).map{_ in DNABase(rawValue: Int.random(in: 0...3))!}
@@ -47,7 +83,7 @@ extension HeuristicAlgorithm{
             $0 == .C || $0 == .G
         }.count
     }
-    mutating func fixGC(){
+    func fixGC(){
         for i in 0..<popSize{
             let l = pops[i].sequence.count
             let GC = GCCount(pops[i].sequence)
@@ -75,7 +111,9 @@ extension HeuristicAlgorithm{
             }
         }
     }
-    func rectify(_ lhs:Double) -> Int{
-        Int(min(Double(upper), max(Double(lower), lhs)))
+    func rectify(_ lhs:Double) -> DNABase{
+        DNABase(rawValue: Int(min(Double(upper), max(Double(lower), lhs))))!
     }
 }
+
+
