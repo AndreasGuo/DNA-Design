@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E18454EE293A3EB300864361 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18454ED293A3EB300864361 /* main.swift */; };
+		E18454F7293A3EEF00864361 /* constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18454F6293A3EEF00864361 /* constraints.swift */; };
+		E18454F9293A3EF700864361 /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18454F8293A3EF700864361 /* Individual.swift */; };
+		E18454FB293A3EFE00864361 /* NSGA-II.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18454FA293A3EFE00864361 /* NSGA-II.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,10 @@
 /* Begin PBXFileReference section */
 		E18454EA293A3EB300864361 /* DNA Design */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "DNA Design"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E18454ED293A3EB300864361 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		E18454F6293A3EEF00864361 /* constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constraints.swift; sourceTree = "<group>"; };
+		E18454F8293A3EF700864361 /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
+		E18454FA293A3EFE00864361 /* NSGA-II.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSGA-II.swift"; sourceTree = "<group>"; };
+		E18454FD293A3F2800864361 /* HeuristicAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeuristicAlgorithm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +64,21 @@
 		E18454EC293A3EB300864361 /* DNA Design */ = {
 			isa = PBXGroup;
 			children = (
+				E18454FC293A3F2800864361 /* HeuristicAlgorithms */,
+				E18454F6293A3EEF00864361 /* constraints.swift */,
+				E18454F8293A3EF700864361 /* Individual.swift */,
+				E18454FA293A3EFE00864361 /* NSGA-II.swift */,
 				E18454ED293A3EB300864361 /* main.swift */,
 			);
 			path = "DNA Design";
+			sourceTree = "<group>";
+		};
+		E18454FC293A3F2800864361 /* HeuristicAlgorithms */ = {
+			isa = PBXGroup;
+			children = (
+				E18454FD293A3F2800864361 /* HeuristicAlgorithm.swift */,
+			);
+			path = HeuristicAlgorithms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +139,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18454FB293A3EFE00864361 /* NSGA-II.swift in Sources */,
+				E18454F9293A3EF700864361 /* Individual.swift in Sources */,
+				E18454F7293A3EEF00864361 /* constraints.swift in Sources */,
 				E18454EE293A3EB300864361 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

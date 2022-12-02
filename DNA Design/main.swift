@@ -7,5 +7,6 @@
 
 import Foundation
 
-print("Hello, World!")
-
+let a = DNABase(rawValue: 0)!
+let b: DNABase = .G
+print(a.code()+b.code())
