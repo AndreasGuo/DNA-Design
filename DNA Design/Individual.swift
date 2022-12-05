@@ -8,11 +8,12 @@
 import Foundation
 struct Individual{
     var sequence = [DNABase]()
+    var group = Array<Int>()
     var costs = [Int]()
     var rank: Int = 0
     var crowdingDistance: Double = 0
     var dominitedCount = 0
-    var dominitionSet = [Individual]()
+    var dominitionSet = [Int]()
     
     mutating func minusDominitedCount(){
         self.dominitedCount -= 1

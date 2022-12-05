@@ -12,13 +12,18 @@ class TSA: BaseHA{
     }
     
     override func boot() {
-        for s in 0..<10{
+        var s=1
+        while DNAs.count < 500{
             print("############# STRAND \(s) start ##############")
             initPop()
             strand()
-            DNAs.append(bestIndividual.sequence)
             print("############# STRAND \(s) end ##############")
-            print(bestIndividual.toString())
+            if bestIndividual.costs.first==0 && bestIndividual.costs.last==0 && !DNAs.contains(bestIndividual.sequence){
+                DNAs.append(bestIndividual.sequence)
+                print("C and H are both 0. added")
+                print(bestIndividual.toString())
+                s = s+1
+            }
         }
     }
     
@@ -26,7 +31,7 @@ class TSA: BaseHA{
     let x_max:Double = 4
     override func strand() {
         for t in 0..<maxIteration{
-            let start = Date.now
+            let start = CFAbsoluteTimeGetCurrent()
             fixGC()
             fit()
             nsga2(individuals: &self.pops)
@@ -70,8 +75,9 @@ class TSA: BaseHA{
                     }
                 }
             }
-            let interval = Date.timeIntervalSince(start)
-            print("iteration: \(t),  best: \(bestIndividual.toString()), \(bestIndividual.costs), time interval: \(String(describing: interval))")
+            let end = CFAbsoluteTimeGetCurrent()
+            let interval = String(format: "%.3f", end - start)
+            print("iteration: \(t+1),  best: \(bestIndividual.toString()), \(bestIndividual.costs), time interval: \(interval)s")
         }
     }
     

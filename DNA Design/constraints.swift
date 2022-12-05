@@ -56,7 +56,7 @@ func hairpin(sequence: DNA, pMin: Int, rMin: Int) -> Int{
     return value
 }
 
-func hmAndSmOneStrand(DNAs: [DNA], DS: Double, CS: Double, CH: Int, DH: Int) -> (Int, Int){
+func hmAndSmOneStrand(DNAs: [DNA]) -> (Int, Int){
     let m = DNAs.count
     let l = DNAs[0].count
     let GAP = 0 // round 1/4
@@ -88,7 +88,7 @@ func hmAndSmOneStrand(DNAs: [DNA], DS: Double, CS: Double, CH: Int, DH: Int) -> 
     return (hm, sm)
 }
 
-func hmAndSm(DNAs: [DNA], DS: Double, CS: Double, DH: Int) -> ([Int], [Int]){
+func hmAndSm(DNAs: [DNA]) -> ([Int], [Int]){
     let m = DNAs.count
     let l = DNAs[0].count
     let GAP = 0 // round 1/4
@@ -181,13 +181,13 @@ fileprivate func shift(sequence: DNA, i: Int) -> DNA{
     return temp
 }
 
-fileprivate func sCont(x: DNA, y: DNA, CS: Double)->Int{
+fileprivate func sCont(x: DNA, y: DNA, CS: Int)->Int{
     var sigmaEq = 0
     var i = 0
     let l = min(x.count, y.count)
     while i<l {
         let e = ceq(x: x, y: y, at: i)
-        sigmaEq += Double(e)>CS*Double(l) ? e : 0
+        sigmaEq += e>CS ? e : 0
         i += 1
     }
     return sigmaEq
@@ -203,13 +203,13 @@ fileprivate func hCont(x: DNA, y: DNA, CH: Int) -> Int {
     return h
 }
 
-fileprivate func hDis(x: DNA, y: DNA, DH: Int) -> Int{
+fileprivate func hDis(x: DNA, y: DNA, DH: Double) -> Int{
     var sigmaBp = 0
     let l = min(x.count, y.count)
     for i in 0..<l {
         sigmaBp += x[i]+y[i]==3 ? 1 : 0
     }
-    return sigmaBp>DH ? sigmaBp : 0
+    return sigmaBp>Int(DH*Double(x.count)) ? sigmaBp : 0
 }
 
 fileprivate func sHis(x: DNA, y: DNA, DS: Double) -> Int{
